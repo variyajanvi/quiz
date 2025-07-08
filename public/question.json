@@ -1,0 +1,34 @@
+[
+  {
+    "question": "What is Linux?",
+    "answers": {
+      "answer_a": "An OS",
+      "answer_b": "A DB",
+      "answer_c": "A Browser",
+      "answer_d": null
+    },
+    "correct_answers": {
+      "answer_a_correct": "true",
+      "answer_b_correct": "false",
+      "answer_c_correct": "false",
+      "answer_d_correct": "false"
+    },
+    "category": "Linux"
+  },
+  {
+    "question": "What is PHP?",
+    "answers": {
+      "answer_a": "A scripting language",
+      "answer_b": "A server",
+      "answer_c": "An OS",
+      "answer_d": null
+    },
+    "correct_answers": {
+      "answer_a_correct": "true",
+      "answer_b_correct": "false",
+      "answer_c_correct": "false",
+      "answer_d_correct": "false"
+    },
+    "category": "PHP"
+  }
+]
