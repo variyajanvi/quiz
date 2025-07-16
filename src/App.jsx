@@ -76,12 +76,13 @@ if (typeof window !== "undefined") {
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [pendingCategory, setPendingCategory] = useState(null);
   const [name, setName] = useState("");
+  const [pendingCategory, setPendingCategory] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [score, setScore] = useState(0);
   const [loadingScreen, setLoadingScreen] = useState(true);
   const [quizLoading, setQuizLoading] = useState(false);
+  
 
   useEffect(() => {
     const loggedIn = localStorage.getItem("isLoggedIn") === "true";
@@ -93,24 +94,7 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
-  // const fetchQuestions = async (category = "", difficulty = "") => {
-  //   setQuizLoading(true);
-  //   try {
-  //     const { data } = await axios.get(
-  //       `https://opentdb.com/api.php?amount=10${
-  //         category ? `&category=${category}` : ""
-  //       }${difficulty ? `&difficulty=${difficulty}` : ""}&type=multiple`
-  //     );
-  //     setQuestions(data.response_code === 0 ? data.results : []);
-  //   } catch (err) {
-  //     console.error("Error fetching questions:", err);
-  //     setQuestions([]);
-  //   }
-  //   setQuizLoading(false);
-  // };
 
-
-// const fetchQuestions = async (category = "", difficulty = "", amount = 10) => {
  const fetchQuestions = async (category = "", difficulty = "", amount = 10) => {
   try {
     const res = await fetch(
@@ -130,7 +114,7 @@ function App() {
 
   if (loadingScreen) return <Loader />;
 
-  return (
+   return(
     <BrowserRouter>
       <div className="app">
         {quizLoading && (
@@ -138,21 +122,33 @@ function App() {
             <div style={quizLoaderStyle}></div>
           </div>
         )}
-
-        <Routes>
-          <Route path="/" element={<HomieHome />} />
+ <Routes>
+          {/* ✅ Login Page */}
           <Route
             path="/login"
             element={
               <LoginPage
                 setIsLoggedIn={setIsLoggedIn}
-                pendingCategory={pendingCategory}
-                setPendingCategory={setPendingCategory}
                 setName={setName}
-                fetchQuestions={fetchQuestions}
               />
             }
           />
+
+          {/* ✅ Main Pages after Login */}
+          <Route path="/" element={<HomieHome />} />
+          <Route
+            path="/category"
+            element={
+              <Categories
+                isLoggedIn={isLoggedIn}
+                setName={setName}
+                name={name}
+                fetchQuestions={fetchQuestions}
+                setPendingCategory={setPendingCategory}
+              />
+            }
+          />
+          
           <Route
             path="/category"
             element={
